@@ -1,0 +1,15 @@
+#! /bin/bash
+
+# dwmblocks &                     # start dwmblocks
+# slstatus &                    # start slstatus
+
+picom --experimental-backends & # start the compositor
+
+~/.fehbg &                      # set the wallpaper
+
+lxsession &
+
+xinput --set-prop 11 305 1 &    # enable tap to click 
+setxkbmap gb &                  # yes, i have a bri'ish keyboard layout
+
+xss-lock slock &                # screenlock that sucks less.
