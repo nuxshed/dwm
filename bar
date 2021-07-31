@@ -1,0 +1,59 @@
+#!/bin/sh
+# shellcheck disable=SC2059,SC2086
+
+bat() {
+  CHARGE=$(cat /sys/class/power_supply/BAT0/capacity)
+  STATUS=$(cat /sys/class/power_supply/BAT0/status)
+
+
+  if [ "$STATUS" = "Charging" ]; then
+    printf "^c#98c379^  $CHARGE"
+  elif [ "$STATUS" = "Discharging" ]; then
+    if [ "$CHARGE" -lt 10 ]; then
+      printf "^c#e06c75^ only  $CHARGE left, charge the damn laptop"
+    elif [ "$CHARGE" -lt 20 ]; then
+      printf "^c#e06c75^  $CHARGE"
+    elif [ "$CHARGE" -lt 30 ]; then
+      printf "^c#e5c07b^  $CHARGE"
+    elif [ "$CHARGE" -lt 40 ]; then
+      printf "^c#e5c07b^  $CHARGE"
+    elif [ "$CHARGE" -lt 50 ]; then
+      printf "^c#98c379^  $CHARGE"
+    elif [ "$CHARGE" -lt 60 ]; then
+      printf "^c#96c379^  $CHARGE"
+    elif [ "$CHARGE" -lt 70 ]; then
+      printf "^c#98c379^  $CHARGE"
+    elif [ "$CHARGE" -lt 80 ]; then
+      printf "^c#98c379^  $CHARGE"
+    elif [ "$CHARGE" -lt 90 ]; then
+      printf "^c#98c379^  $CHARGE"
+    elif [ "$CHARGE" -lt 100 ]; then
+      printf "^c#98c739^  $CHARGE"
+    fi
+  elif [ "$STATUS" = "Full" ]; then
+      printf "^c#98c379^  $CHARGE"
+  fi
+}
+
+vol() {
+  vol=$(amixer get Master | tail -n1 | sed -r 's/.*\[(.*)%\].*/\1/')
+  printf "^c#61afef^ 墳 $vol"
+}
+
+wlan() {
+  case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+  up) printf "^c#c678dd^直  Connected" ;;
+  down) printf "^c#e06c75^睊   Disconnected" ;;
+  esac
+}
+
+clock() {
+  printf "^c#d19a66^  $(date '+%H:%M') "
+}
+
+# no delay at startup
+xsetroot -name "$(bat)% | $(vol)% | $(wlan) | $(clock)"
+
+while true; do
+  sleep 2 && xsetroot -name "$(bat)% | $(vol)% | $(wlan) | $(clock)"
+done
