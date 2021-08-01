@@ -146,6 +146,7 @@ static Key keys[] = {
         { MODKEY,                       XK_Print,  spawn,          SHCMD("scr screentoclip")},
         { MODKEY|ControlMask,           XK_Print,  spawn,          SHCMD("scr windowtoclip")},
         { MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
+        { MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun")},
 };
 
 /* button definitions */
