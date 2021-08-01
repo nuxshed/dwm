@@ -132,6 +132,20 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+        { 0,                            0x1008FF02,spawn,          SHCMD("brightnessctl s +5%")  },
+        { 0,                            0x1008FF03,spawn,          SHCMD("brightnessctl s 5%-")  },
+        { ControlMask,                  0x1008FF02,spawn,          SHCMD("brightnessctl s +1%")  },
+        { ControlMask,                  0x1008FF03,spawn,          SHCMD("brightnessctl s 1%-")  },
+        { 0,                            0x1008FF11,spawn,          SHCMD("vol -5%")  },
+        { 0,                            0x1008FF13,spawn,          SHCMD("vol +5%")  },
+        { ControlMask,                  0x1008FF11,spawn,          SHCMD("vol -1%")  },
+        { ControlMask,                  0x1008FF13,spawn,          SHCMD("vol +1%")  },
+        { 0,                            XK_Print,  spawn,          SHCMD("scr screen")},
+        { ControlMask,                  XK_Print,  spawn,          SHCMD("scr window")},
+        { ShiftMask,                    XK_Print,  spawn,          SHCMD("scr selection")},
+        { MODKEY,                       XK_Print,  spawn,          SHCMD("scr screentoclip")},
+        { MODKEY|ControlMask,           XK_Print,  spawn,          SHCMD("scr windowtoclip")},
+        { MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
 };
 
 /* button definitions */
