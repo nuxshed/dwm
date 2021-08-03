@@ -5,7 +5,6 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 #### Patches:
 
 - status2d
-- centeredmaster
 - vanitygaps
 - dragmfact
 - dragcfact
@@ -13,3 +12,17 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 - autostart
 - fullscreen-compilation
 - placemouse
+
+#### Layouts:
+
+- tile
+- monocle
+- floating
+- spiral
+- dwindle
+- deck
+- bottomstack
+- bottomstackhoriz
+- grid
+- centeredmaster
+- centeredfloatingMaster
