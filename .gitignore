@@ -2,3 +2,4 @@ dwm
 *.o
 *.orig
 *.rej
+config.h
