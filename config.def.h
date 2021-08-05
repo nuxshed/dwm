@@ -22,23 +22,26 @@ static const char col_green[]       = "#98c379";
 static const char col_blue[]        = "#61afef";
 static const char col_yellow[]      = "#e5c07b";
 static const char *colors[][3]      = {
-	//               fg            bg              border
-	[SchemeNorm] = { col_fg,       col_gray1,      col_gray2 },
-	[SchemeSel]  = { col_gray2,    col_magenta,    col_blue},
+	//                      fg            bg              border
+	[SchemeNorm] =        { col_fg,       col_gray1,      col_gray2 },
+	[SchemeSel]  =        { col_gray2,    col_magenta,    col_blue},
+	[SchemeScratchSel]  = { col_gray2,    col_magenta,    col_magenta  },
+	[SchemeScratchNorm] = { col_gray2,    col_magenta,    col_gray2 },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
+// TODO: actually use this
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-};
+	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        0  },
+	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1,        0  },
+	{ NULL,       NULL,   "scratchpad",   0,            1,           -1,       's' },};
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -81,10 +84,16 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_fg, "-sb", col_red, "-sf", col_gray1, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
 
+/*First arg only serves to match against key in rules*/
+static const char *scratchpadcmd[] = {"s", "kitty", NULL};
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_g,      togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ControlMask,           XK_g,      setscratch,     {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -129,7 +138,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[5]} },
 	{ MODKEY|ShiftMask,             XK_w,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY,                       XK_g,      setlayout,      {.v = &layouts[7]} },
+	{ MODKEY|ShiftMask|ControlMask, XK_g,      setlayout,      {.v = &layouts[7]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[8]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[9]} },
 	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[10]} },
