@@ -12,21 +12,22 @@ static const int showbar            = 1;        // 0 means no bar
 static const int topbar             = 1;        // 0 means bottom bar
 static const char *fonts[]          = { "Fira Code Nerd Font:size=8" };
 static const char dmenufont[]       = "Fira Code Nerd Font:size=8";
-static const char col_gray1[]       = "#131519";
-static const char col_gray2[]       = "#1b1d23";
-static const char col_gray3[]       = "#282c34";
-static const char col_fg[]          = "#abb2bf";
-static const char col_magenta[]     = "#c678dd";
-static const char col_red[]         = "#e06c75";
-static const char col_green[]       = "#98c379";
-static const char col_blue[]        = "#61afef";
-static const char col_yellow[]      = "#e5c07b";
+static const char col_gray1[]       = "#1d2021";
+static const char col_gray2[]       = "#282828";
+static const char col_gray3[]       = "#3f3f3f";
+static const char col_fg[]          = "#ddc7a1";
+static const char col_magenta[]     = "#d3869b";
+static const char col_red[]         = "#ea6962";
+static const char col_green[]       = "#a9b665";
+static const char col_blue[]        = "#7daea3";
+static const char col_yellow[]      = "#d8a657";
+static const char col_aqua[]        = "#89b482";
 static const char *colors[][3]      = {
 	//                      fg            bg              border
-	[SchemeNorm] =        { col_fg,       col_gray1,      col_gray2 },
-	[SchemeSel]  =        { col_gray2,    col_magenta,    col_blue},
-	[SchemeScratchSel]  = { col_gray2,    col_magenta,    col_magenta  },
-	[SchemeScratchNorm] = { col_gray2,    col_magenta,    col_gray2 },
+	[SchemeNorm] =        { col_fg,       col_gray1,      col_gray3 },
+	[SchemeSel]  =        { col_gray2,    col_aqua,    col_aqua},
+	[SchemeScratchSel]  = { col_gray2,    col_aqua,    col_red },
+	[SchemeScratchNorm] = { col_gray2,    col_aqua,    col_gray2 },
 };
 
 /* tagging */
