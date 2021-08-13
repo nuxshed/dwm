@@ -8,6 +8,8 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 - status2d
 - vanitygaps
 - attachasideandbelow
+- renamedscratchpads
+- swallow
 - dragmfact
 - dragcfact
 - cfacts
