@@ -3,6 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        // border pixel of windows
 static const unsigned int snap      = 10;       // snap pixel
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 10;       // horiz inner gap between windows
 static const unsigned int gappiv    = 10;       // vert inner gap between windows
 static const unsigned int gappoh    = 20;       // horiz outer gap between windows and screen edge
@@ -39,10 +40,13 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        0  },
-	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1,        0  },
-	{ NULL,       NULL,   "scratchpad",   0,            1,           -1,       's' },};
+	/* class      instance         title       tags mask     isfloating   isterminal   noswallow   monitor    scratch key */
+	{ "Gimp",     NULL,            NULL,       0,            1,           0,           0,         -1,         0  },
+	{ "firefox",  NULL,            NULL,       0,            0,           0,          -1,         -1,         0  },
+        { "kitty",    NULL,            NULL,       0,            0,           1,           0,         -1,         0  },
+	{ NULL,       NULL,       "scratchpad",    0,            1,           0,           0,         -1,        's' },
+	{ NULL,       NULL,       "Event Tester",  0,            0,           0,           1,         -1,         0  }, /* xev */
+};
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
