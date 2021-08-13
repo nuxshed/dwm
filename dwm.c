@@ -2064,7 +2064,7 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
-	system("kill '$(pgrep bar)'");
+	system("pkill bar'");
 	running = 0;
 }
 
