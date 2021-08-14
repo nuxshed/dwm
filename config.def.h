@@ -83,11 +83,22 @@ static const Layout layouts[] = {
 
 /* key definitions */
 #define MODKEY Mod4Mask
+#define Shift ShiftMask
+#define Ctrl ControlMask
+#define Alt Mod1Mask
+#define AltGr Mod3Mask
+#define ShiftGr Mod5Mask
+
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+
+#define SCRATCHKEYS(KEY,CMD) \
+	{ MODKEY,                      KEY,      togglescratch,     {.v = CMD } }, \
+	{ MODKEY|Ctrl,                 KEY,      setscratch,        {.v = CMD } }, \
+	{ MODKEY|Ctrl|Shift,           KEY,      removescratch,     {.v = CMD } }, \
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -99,7 +110,7 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *layoutmenu_cmd = "~/.dwm/layoutmenu.sh";
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchpadcmd[] = {"s", "kitty", NULL};
+static const char *scratchcmd1[] = {"s", "kitty", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -107,9 +118,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_Return, riospawn,       {.v = termcmd } },
 	{ MODKEY,                       XK_s,      rioresize,      {0} },
-	{ MODKEY,                       XK_g,      togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY|ShiftMask,             XK_g,      removescratch,  {.v = scratchpadcmd } },
-	{ MODKEY|ControlMask,           XK_g,      setscratch,     {.v = scratchpadcmd } },
+        SCRATCHKEYS(                    XK_g,                      scratchcmd1)
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
