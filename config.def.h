@@ -96,6 +96,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_fg, "-sb", col_red, "-sf", col_gray1, NULL };
 static const char *termcmd[]  = { "kitty", NULL };
+static const char *layoutmenu_cmd = "~/.dwm/layoutmenu.sh";
 
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "kitty", NULL};
@@ -241,7 +242,7 @@ static Key keys[] = {
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	{ ClkLtSymbol,          0,              Button3,        layoutmenu,     {0} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	/* placemouse options, choose which feels more natural:
