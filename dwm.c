@@ -2205,7 +2205,7 @@ propertynotify(XEvent *e)
 void
 quit(const Arg *arg)
 {
-	system("pkill bar'");
+	system("pkill bar");
 	running = 0;
 }
 
