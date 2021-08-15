@@ -63,7 +63,7 @@ static const int resizehints = 1;    /* 1 means respect size hints in tiled resi
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
-#include "vanitygaps.c"
+#include "lib/layouts.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
