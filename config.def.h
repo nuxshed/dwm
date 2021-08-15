@@ -300,7 +300,6 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  incrohgaps,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  incrovgaps,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  incnstack,           1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  riospawn,            1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  rioresize,           1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  togglebar,           1,      {ARG_TYPE_NONE}   ),
