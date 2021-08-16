@@ -115,6 +115,7 @@ static const char *scratchcmd1[] = {"s", "kitty", NULL};
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("~/.dwm/prompt.sh") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_Return, riospawn,       {.v = termcmd } },
 	{ MODKEY,                       XK_s,      rioresize,      {0} },
@@ -276,6 +277,7 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
   IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  floatpos,            1,      {ARG_TYPE_STR}    ),
+  IPCCOMMAND(  defaultgaps,         1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  incrgaps,            1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  incrigaps,           1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  incrogaps,           1,      {ARG_TYPE_SINT}   ),
