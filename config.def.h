@@ -270,7 +270,7 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  focusstack,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  zoom,                1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
-  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_SINT}   ),
+  IPCCOMMAND(  killclient,          1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
   IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
