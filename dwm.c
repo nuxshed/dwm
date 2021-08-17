@@ -73,7 +73,10 @@ enum { CurNormal, CurResize, CurMove, CurResizeHorzArrow, CurResizeVertArrow, Cu
 enum { SchemeNorm, SchemeSel, SchemeScratchNorm, SchemeScratchSel }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
-       NetWMWindowTypeDialog, NetClientList, NetClientListStacking, NetDesktopNames, NetDesktopViewport, NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
+       NetWMWindowTypeDialog, NetClientList, NetClientListStacking, 
+       NetCloseWindow, NetDesktopNames, NetDesktopViewport,
+       NetNumberOfDesktops, NetCurrentDesktop, NetLast }; /* EWMH atoms */
+enum { WMProtocols, WMDelete, WMState, WMTakeFocus, WMLast }; /* default atoms */
 enum { ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
        ClkClientWin, ClkRootWin, ClkLast }; /* clicks */
 
@@ -703,7 +706,10 @@ clientmessage(XEvent *e)
 				c->fakefullscreen = 3;
  			setfullscreen(c, (cme->data.l[0] == 1 /* _NET_WM_STATE_ADD    */
  				|| (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */ && !c->isfullscreen)));
-		}	} else if (cme->message_type == netatom[NetActiveWindow]) {
+		}	
+	} else if (cme->message_type == netatom[NetCloseWindow]) {
+		killclient(&((Arg) { .v = c }));
+	} else if (cme->message_type == netatom[NetActiveWindow]) {
 		if (c != selmon->sel && !c->isurgent)
 			seturgent(c, 1);
 	}
@@ -1764,13 +1770,21 @@ keypress(XEvent *e)
 void
 killclient(const Arg *arg)
 {
-	if (!selmon->sel)
+	Client *c;
+
+	if (arg->v) {
+		c = (Client *) arg->v;
+	} else {
+		c = selmon->sel;
+	}
+
+	if (!c)
 		return;
 	if (!sendevent(selmon->sel, wmatom[WMDelete])) {
 		XGrabServer(dpy);
 		XSetErrorHandler(xerrordummy);
 		XSetCloseDownMode(dpy, DestroyAll);
-		XKillClient(dpy, selmon->sel->win);
+		XKillClient(dpy, c->win);
 		XSync(dpy, False);
 		XSetErrorHandler(xerror);
 		XUngrabServer(dpy);
@@ -2929,6 +2943,7 @@ setup(void)
 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
 	netatom[NetClientListStacking] = XInternAtom(dpy, "_NET_CLIENT_LIST_STACKING", False);
+	netatom[NetCloseWindow] = XInternAtom(dpy, "_NET_CLOSE_WINDOW", False);
 	netatom[NetDesktopViewport] = XInternAtom(dpy, "_NET_DESKTOP_VIEWPORT", False);
 	netatom[NetNumberOfDesktops] = XInternAtom(dpy, "_NET_NUMBER_OF_DESKTOPS", False);
 	netatom[NetCurrentDesktop] = XInternAtom(dpy, "_NET_CURRENT_DESKTOP", False);
