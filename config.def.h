@@ -77,6 +77,7 @@ static const Layout layouts[] = {
 	{ "HHH",      grid },
 	{ "|M|",      centeredmaster },
 	{ ">M>",      centeredfloatingmaster },
+	{ "|+|",      tatami },
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };

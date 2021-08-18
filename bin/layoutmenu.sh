@@ -11,5 +11,6 @@ TTT bstack				5
 HHH grid				7
 |M| centeredmaster			8
 >M> centeredfloatingmaster   		9
-><> floating     			10
+|+| tatami 				10
+><> floating     			11
 EOF
