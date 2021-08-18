@@ -16,7 +16,7 @@ static const char slopresizestyle[] = "-t 0 -c 0.92,0.85,0.69,0.3"; /* do NOT de
 static const int riodraw_borders    = 0;        /* 0 or 1, indicates whether the area drawn using slop includes the window borders */
 static const int riodraw_matchpid   = 1;        /* 0 or 1, indicates whether to match the PID of the client that was spawned with riospawn */
 static const int riodraw_spawnasync = 0;        /* 0 means that the application is only spawned after a successful selection while
-                                                 * 1 means that the application is being initialised in the background while the selection is made */
+						* 1 means that the application is being initialised in the background while the selection is made */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
 static const char *fonts[]          = { "Fira Code Nerd Font:size=8" };
@@ -132,30 +132,14 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_l,      placedir,       {.i = 1 } },
 	{ MODKEY|ControlMask,           XK_k,      placedir,       {.i = 2 } },
 	{ MODKEY|ControlMask,           XK_j,      placedir,       {.i = 3 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+	{ MODKEY,                       XK_equal,  incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_minus,  incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY|ShiftMask,             XK_h,      setcfact,       {.f = +0.25} },
 	{ MODKEY|ShiftMask,             XK_l,      setcfact,       {.f = -0.25} },
 	{ MODKEY|ShiftMask,             XK_o,      setcfact,       {.f =  0.00} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
-	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
-	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
@@ -168,7 +152,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask|ControlMask, XK_g,      setlayout,      {.v = &layouts[7]} },
 	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[8]} },
 	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[9]} },
-	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[10]} },
+	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[10]} },
+	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[11]} },
 
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -181,22 +166,22 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	/* Client position is limited to monitor window area */
-	{ Mod4Mask,                     XK_Up,     floatpos,       {.v = "  0x -26y" } }, // ↑
-	{ Mod4Mask,                     XK_Left,   floatpos,       {.v = "-26x   0y" } }, // ←
-	{ Mod4Mask,                     XK_Right,  floatpos,       {.v = " 26x   0y" } }, // →
-	{ Mod4Mask,                     XK_Down,   floatpos,       {.v = "  0x  26y" } }, // ↓
+	{ Mod4Mask,                     XK_Up,     floatpos,       {.v = "  0x -30y" } }, // ↑
+	{ Mod4Mask,                     XK_Left,   floatpos,       {.v = "-30x   0y" } }, // ←
+	{ Mod4Mask,                     XK_Right,  floatpos,       {.v = " 30x   0y" } }, // →
+	{ Mod4Mask,                     XK_Down,   floatpos,       {.v = "  0x  30y" } }, // ↓
 	/* Absolute positioning (allows moving windows between monitors) */
-	{ Mod4Mask|ControlMask,         XK_Up,     floatpos,       {.v = "  0a -26a" } }, // ↑
-	{ Mod4Mask|ControlMask,         XK_Left,   floatpos,       {.v = "-26a   0a" } }, // ←
-	{ Mod4Mask|ControlMask,         XK_Right,  floatpos,       {.v = " 26a   0a" } }, // →
-	{ Mod4Mask|ControlMask,         XK_Down,   floatpos,       {.v = "  0a  26a" } }, // ↓
+	{ Mod4Mask|ControlMask,         XK_Up,     floatpos,       {.v = "  0a -30a" } }, // ↑
+	{ Mod4Mask|ControlMask,         XK_Left,   floatpos,       {.v = "-30a   0a" } }, // ←
+	{ Mod4Mask|ControlMask,         XK_Right,  floatpos,       {.v = " 30a   0a" } }, // →
+	{ Mod4Mask|ControlMask,         XK_Down,   floatpos,       {.v = "  0a  30a" } }, // ↓
 	/* Resize client, client center position is fixed which means that client expands in all directions */
-	{ Mod4Mask|ShiftMask,           XK_Up,      floatpos,       {.v = "  0w -26h" } }, // ↑
-	{ Mod4Mask|ShiftMask,           XK_Left,    floatpos,       {.v = "-26w   0h" } }, // ←
-	{ Mod4Mask|ShiftMask,           XK_plus,    floatpos,       {.v = "800W 800H" } }, // +
-	{ Mod4Mask|ShiftMask,           XK_minus,   floatpos,       {.v="-800W -800H" } }, // -
-	{ Mod4Mask|ShiftMask,           XK_Right,   floatpos,       {.v = " 26w   0h" } }, // →
-	{ Mod4Mask|ShiftMask,           XK_Down,    floatpos,       {.v = "  0w  26h" } }, // ↓
+	{ Mod4Mask|ShiftMask,           XK_Up,      floatpos,       {.v = "  0w -30h" } }, // ↑
+	{ Mod4Mask|ShiftMask,           XK_Left,    floatpos,       {.v = "-30w   0h" } }, // ←
+	{ Mod4Mask|ShiftMask,           XK_equal,   floatpos,       {.v = "30w 30h" } }, // +
+	{ Mod4Mask|ShiftMask,           XK_minus,   floatpos,       {.v="-30w -30h" } }, // -
+	{ Mod4Mask|ShiftMask,           XK_Right,   floatpos,       {.v = " 30w   0h" } }, // →
+	{ Mod4Mask|ShiftMask,           XK_Down,    floatpos,       {.v = "  0w  30h" } }, // ↓
 	/* Client is positioned in a floating grid, movement is relative to client's current position */
 	{ Mod4Mask|Mod1Mask,            XK_Up,      floatpos,       {.v = " 0p -1p" } }, // ↑
 	{ Mod4Mask|Mod1Mask,            XK_Left,    floatpos,       {.v = "-1p  0p" } }, // ←
@@ -212,23 +197,43 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-        { 0,                            0x1008FF02,spawn,          SHCMD("bri +5%")  },
-        { 0,                            0x1008FF03,spawn,          SHCMD("bri 5%-")  },
-        { ControlMask,                  0x1008FF02,spawn,          SHCMD("bri +1%")  },
-        { ControlMask,                  0x1008FF03,spawn,          SHCMD("bri 1%-")  },
-        { 0,                            0x1008FF11,spawn,          SHCMD("vol -5%")  },
-        { 0,                            0x1008FF13,spawn,          SHCMD("vol +5%")  },
-        { ControlMask,                  0x1008FF11,spawn,          SHCMD("vol -1%")  },
-        { ControlMask,                  0x1008FF13,spawn,          SHCMD("vol +1%")  },
-        { 0,                            0x1008FF12,spawn,          SHCMD("mute")     },
-        { 0,                            XK_Print,  spawn,          SHCMD("scr screen")},
-        { ControlMask,                  XK_Print,  spawn,          SHCMD("scr window")},
-        { ShiftMask,                    XK_Print,  spawn,          SHCMD("scr selection")},
-        { MODKEY,                       XK_Print,  spawn,          SHCMD("scr screentoclip")},
-        { MODKEY|ControlMask,           XK_Print,  spawn,          SHCMD("scr windowtoclip")},
-        { MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
-        { MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun")},
+	{ 0,                            0x1008FF02,spawn,          SHCMD("bri +5%")  },
+	{ 0,                            0x1008FF03,spawn,          SHCMD("bri 5%-")  },
+	{ ControlMask,                  0x1008FF02,spawn,          SHCMD("bri +1%")  },
+	{ ControlMask,                  0x1008FF03,spawn,          SHCMD("bri 1%-")  },
+	{ 0,                            0x1008FF11,spawn,          SHCMD("vol -5%")  },
+	{ 0,                            0x1008FF13,spawn,          SHCMD("vol +5%")  },
+	{ ControlMask,                  0x1008FF11,spawn,          SHCMD("vol -1%")  },
+	{ ControlMask,                  0x1008FF13,spawn,          SHCMD("vol +1%")  },
+	{ 0,                            0x1008FF12,spawn,          SHCMD("mute")     },
+	{ 0,                            XK_Print,  spawn,          SHCMD("scr screen")},
+	{ ControlMask,                  XK_Print,  spawn,          SHCMD("scr window")},
+	{ ShiftMask,                    XK_Print,  spawn,          SHCMD("scr selection")},
+	{ MODKEY,                       XK_Print,  spawn,          SHCMD("scr screentoclip")},
+	{ MODKEY|ControlMask,           XK_Print,  spawn,          SHCMD("scr windowtoclip")},
+	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
+	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun")},
+
+        // Disabled Keybindings (use duskc or prompt)
+	// { MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_i,      incrigaps,      {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_o,      incrogaps,      {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_o,      incrogaps,      {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_6,      incrihgaps,     {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_6,      incrihgaps,     {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_7,      incrivgaps,     {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_7,      incrivgaps,     {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_8,      incrohgaps,     {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_8,      incrohgaps,     {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_9,      incrovgaps,     {.i = +1 } },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
+	// { MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
+	// { MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+
 };
 
 /* button definitions */
