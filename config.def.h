@@ -19,6 +19,7 @@ static const int riodraw_spawnasync = 0;        /* 0 means that the application 
 						* 1 means that the application is being initialised in the background while the selection is made */
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+static unsigned int attachmode      = 3;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
 static const char *fonts[]          = { "Fira Code Nerd Font:size=8" };
 static const char dmenufont[]       = "Fira Code Nerd Font:size=8";
 static const char col_gray1[]       = "#1d2021";
@@ -33,7 +34,7 @@ static const char col_yellow[]      = "#d8a657";
 static const char col_aqua[]        = "#89b482";
 static const char *colors[][3]      = {
 	//                      fg            bg              border
-	[SchemeNorm] =        { col_fg,       col_gray1,      col_gray3 },
+	[SchemeNorm] =        { col_fg,       col_gray1,   col_gray3 },
 	[SchemeSel]  =        { col_gray2,    col_aqua,    col_aqua},
 	[SchemeScratchSel]  = { col_gray2,    col_aqua,    col_red },
 	[SchemeScratchNorm] = { col_gray2,    col_aqua,    col_gray2 },
