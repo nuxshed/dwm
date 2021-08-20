@@ -1,6 +1,7 @@
 static void attach(Client *c);
 static void attachstack(Client *c);
 static void attachx(Client *c);
+static void setattachmode(const Arg *arg);
 
 void
 attach(Client *c)
@@ -65,4 +66,19 @@ attachx(Client *c)
 
 	/* master (default) */
 	attach(c);
+}
+
+void
+setattachmode(const Arg *arg)
+{
+	if (strcmp(arg->v, "master") == 0)
+		attachmode = 0;
+	else if (strcmp(arg->v, "above") == 0)
+		attachmode = 1;
+	else if (strcmp(arg->v, "below") == 0)
+		attachmode = 2;
+	else if (strcmp(arg->v, "aside") == 0)
+		attachmode = 3;
+	else if (strcmp(arg->v, "bottom") == 0)
+		attachmode = 4;
 }

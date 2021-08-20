@@ -9,6 +9,7 @@ zoom
 incnmaster
 killclient
 togglefloating
+setattachmode
 setmfact
 setlayoutsafe
 quit
