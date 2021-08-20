@@ -64,7 +64,12 @@ static const int resizehints = 0;    /* 1 means respect size hints in tiled resi
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #define FORCE_VSPLIT 1  /* nrowgrid layout: force two clients to always split vertically */
+
+// includes
+#include "lib/attach.c"
+#include "lib/ewmh.c"
 #include "lib/layouts.c"
+#include "lib/rio.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -280,6 +285,7 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  killclient,          1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  togglefloating,      1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setattachmode,       1,      {ARG_TYPE_STR}    ),
   IPCCOMMAND(  setmfact,            1,      {ARG_TYPE_FLOAT}  ),
   IPCCOMMAND(  setlayoutsafe,       1,      {ARG_TYPE_PTR}    ),
   IPCCOMMAND(  quit,                1,      {ARG_TYPE_NONE}   ),

@@ -348,7 +348,6 @@ static xcb_connection_t *xcon;
 
 #include "lib/ipc/ipc.h"
 #include "lib/ipc/util.h"
-#include "lib/rio.h"
 
 /* configuration, allows nested code to access above variables */
 #include "config.h"
@@ -359,10 +358,6 @@ static xcb_connection_t *xcon;
 #include "lib/ipc/ipc.c"
 #include "lib/ipc/util.c"
 #endif
-
-#include "lib/ewmh.c"
-#include "lib/attach.c"
-#include "lib/rio.c"
 
 struct Pertag {
 	unsigned int curtag, prevtag; /* current and previous tag */
