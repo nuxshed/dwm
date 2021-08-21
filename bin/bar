@@ -52,8 +52,8 @@ clock() {
 }
 
 # no delay at startup
-xsetroot -name "$(bat)% | $(vol)% | $(wlan) | $(clock)"
+xsetroot -name "$(bat)%   $(vol)%   $(wlan)  $(clock)"
 
 while true; do
-  sleep 2 && xsetroot -name "$(bat)% | $(vol)% | $(wlan) | $(clock)"
+  sleep 2 && xsetroot -name "$(bat)%   $(vol)%   $(wlan)  $(clock)"
 done
