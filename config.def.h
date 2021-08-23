@@ -223,7 +223,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
 	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun")},
 
-        // Disabled Keybindings (use duskc or prompt)
+        // Disabled Keybindings (use dwmc or prompt)
 	// { MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	// { MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
 	// { MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
