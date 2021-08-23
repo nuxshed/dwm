@@ -68,6 +68,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 // includes
 #include "lib/attach.c"
+#include "lib/bar.c"
 #include "lib/ewmh.c"
 #include "lib/layouts.c"
 #include "lib/rio.c"
