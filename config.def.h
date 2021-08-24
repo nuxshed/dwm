@@ -72,6 +72,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "lib/ewmh.c"
 #include "lib/layouts.c"
 #include "lib/rio.c"
+#include "lib/scratchpads.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
