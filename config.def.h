@@ -148,7 +148,9 @@ static const char *termcmd[]  = { "kitty", NULL };
 static const char *layoutmenu_cmd = "~/.dwm/layoutmenu.sh";
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchcmd1[] = {"s", "kitty", NULL};
+static const char *scratchcmd1[] = {"a", "kitty", NULL};
+static const char *scratchcmd2[] = {"s", "kitty", NULL};
+static const char *scratchcmd3[] = {"d", "kitty", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -156,8 +158,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("~/.dwm/prompt.sh") },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY|ControlMask,           XK_Return, riospawn,       {.v = termcmd } },
-	{ MODKEY,                       XK_s,      rioresize,      {0} },
-        SCRATCHKEYS(                    XK_g,                      scratchcmd1)
+	{ MODKEY|ShiftMask,             XK_s,      rioresize,      {0} },
+        SCRATCHKEYS(                    XK_a,                      scratchcmd1)
+        SCRATCHKEYS(                    XK_s,                      scratchcmd2)
+        SCRATCHKEYS(                    XK_d,                      scratchcmd3)
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
