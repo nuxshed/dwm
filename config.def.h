@@ -153,17 +153,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY|ShiftMask|ControlMask, XK_r,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[4]} },
-	{ MODKEY,                       XK_w,      setlayout,      {.v = &layouts[5]} },
-	{ MODKEY|ShiftMask,             XK_w,      setlayout,      {.v = &layouts[6]} },
-	{ MODKEY|ShiftMask|ControlMask, XK_g,      setlayout,      {.v = &layouts[7]} },
-	{ MODKEY,                       XK_u,      setlayout,      {.v = &layouts[8]} },
-	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[9]} },
-	{ MODKEY,                       XK_y,      setlayout,      {.v = &layouts[10]} },
-	{ MODKEY,                       XK_e,      setlayout,      {.v = &layouts[11]} },
-
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_f,      togglefullscreen, {0} },
@@ -224,8 +213,24 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_Print,  spawn,          SHCMD("scr windowtoclip")},
 	{ MODKEY|ShiftMask,             XK_Print,  spawn,          SHCMD("scr selectiontoclip")},
 	{ MODKEY,                       XK_r,      spawn,          SHCMD("rofi -show drun")},
+	{ MODKEY,                       XK_w,      spawn,          SHCMD("rofi -show window")},
+        { MODKEY|ShiftMask,             XK_m,      spawn,          SHCMD("~/.config/rofi/scripts/layout_switcher.sh")}
 
         // Disabled Keybindings (use dwmc or prompt)
+
+	// LAYOUTS (use layoutmenu or layout_switcher)
+	// { MODKEY|ShiftMask,             XK_r,      setlayout,      {.v = &layouts[2]} },
+	// { MODKEY|ShiftMask|ControlMask, XK_r,      setlayout,      {.v = &layouts[3]} },
+	// { MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[4]} },
+	// { MODKEY,                       XK_w,      setlayout,      {.v = &layouts[5]} },
+	// { MODKEY|ShiftMask,             XK_w,      setlayout,      {.v = &layouts[6]} },
+	// { MODKEY|ShiftMask|ControlMask, XK_g,      setlayout,      {.v = &layouts[7]} },
+	// { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[8]} },
+	// { MODKEY,                       XK_o,      setlayout,      {.v = &layouts[9]} },
+	// { MODKEY,                       XK_y,      setlayout,      {.v = &layouts[10]} },
+	// { MODKEY,                       XK_e,      setlayout,      {.v = &layouts[11]} },
+
+        // GAPS (use dwmc/prompt)
 	// { MODKEY|Mod1Mask,              XK_u,      incrgaps,       {.i = +1 } },
 	// { MODKEY|Mod1Mask|ShiftMask,    XK_u,      incrgaps,       {.i = -1 } },
 	// { MODKEY|Mod1Mask,              XK_i,      incrigaps,      {.i = +1 } },
@@ -303,6 +308,7 @@ static IPCCommand ipccommands[] = {
   IPCCOMMAND(  incrovgaps,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  incnmaster,          1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  rioresize,           1,      {ARG_TYPE_NONE}   ),
+  IPCCOMMAND(  setlayoutex,         1,      {ARG_TYPE_SINT}   ),
   IPCCOMMAND(  togglebar,           1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  togglefullscreen,    1,      {ARG_TYPE_NONE}   ),
   IPCCOMMAND(  togglefakefullscreen,1,      {ARG_TYPE_NONE}   ),
