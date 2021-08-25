@@ -52,11 +52,40 @@ static const Rule rules[] = {
 	/* class      instance         title       tags mask     isfloating   isterminal   noswallow   floatpos  monitor    scratch key */
 	{ "Gimp",     NULL,            NULL,       0,            1,           0,           0,           NULL,     -1,         0  },
 	{ "firefox",  NULL,            NULL,       0,            0,           0,          -1,           NULL,     -1,         0  },
-        { "kitty",    NULL,            NULL,       0,            0,           1,           0,           NULL,     -1,         0  },
-        { "Xephyr",   NULL,            NULL,       0,            0,           0,           1,           NULL,     -1,         0, },
+	{ "kitty",    NULL,            NULL,       0,            0,           1,           0,           NULL,     -1,         0  },
+	{ "Xephyr",   NULL,            NULL,       0,            0,           0,           1,           NULL,     -1,         0, },
 	{ NULL,       NULL,       "scratchpad",    0,            1,           0,           0,           NULL,     -1,        's' },
 	{ NULL,       NULL,       "Event Tester",  0,            0,           0,           1,           NULL,     -1,         0  }, /* xev */
 };
+
+/* Bar rules allow you to configure what is shown where on the bar, as well as
+ * introducing your own bar modules.
+ *
+ *    monitor:
+ *      -1  show on all monitors
+ *       0  show on monitor 0
+ *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
+ *    bar - bar index, 0 is default, 1 is extrabar
+ *    alignment - how the module is aligned compared to other modules
+ *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
+ *    name - does nothing, intended for visual clue and for logging / debugging
+ */
+static const BarRule barrules[] = {
+	/* monitor  bar   value  alignment         widthfunc              drawfunc              clickfunc           name */
+	{ -1,       0,    0,    BAR_ALIGN_LEFT,   width_tags,            draw_tags,            click_tags,         "tags" },
+	{ -1,       0,    0,    BAR_ALIGN_LEFT,   width_ltsymbol,        draw_ltsymbol,        click_ltsymbol,     "layout" },
+	{ -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status0" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status1" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status2" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status3" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status4" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status5" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status6" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status7" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status8" },
+	// { -1,       0,    0,    BAR_ALIGN_RIGHT,  width_status,          draw_status,          click_status,       "status9" },
+	{ -1,       0,    0,    BAR_ALIGN_NONE,   width_wintitle,        draw_wintitle,        click_wintitle,     "wintitle" },
+}; 
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -68,7 +97,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 // includes
 #include "lib/attach.c"
-#include "lib/bar.c"
+#include "lib/bar/main.c"
 #include "lib/ewmh.c"
 #include "lib/layouts.c"
 #include "lib/rio.c"

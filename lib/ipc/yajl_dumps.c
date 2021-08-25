@@ -150,10 +150,10 @@ dump_monitor(yajl_gen gen, Monitor *mon, int is_selected)
     )
 
     YSTR("bar"); YMAP(
-      YSTR("y"); YINT(mon->by);
+      YSTR("y"); YINT(mon->bar->by);
       YSTR("is_shown"); YBOOL(mon->showbar);
-      YSTR("is_top"); YBOOL(mon->topbar);
-      YSTR("window_id"); YINT(mon->barwin);
+      YSTR("is_top"); YBOOL(mon->bar->topbar);
+      YSTR("window_id"); YINT(mon->bar->win);
     )
   )
   // clang-format on
