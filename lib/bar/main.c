@@ -21,8 +21,8 @@ drawbarwin(Bar *bar)
 	int r, w, mi;
 	int rx, lx, rw, lw; // bar size, split between left and right if a center module is added
 	const BarRule *br;
-	BarWidthArg warg = { 0 };
-	BarDrawArg darg  = { 0, 0 };
+	BarArg warg = { 0 };
+	BarArg darg  = { 0, 0 };
 
 	for (mi = 0, mon = mons; mon && mon != bar->mon; mon = mon->next, mi++); // get the monitor index
 	rw = lw = bar->bw;

@@ -1,13 +1,13 @@
 int
-width_status(Bar *bar, BarWidthArg *a)
+width_status(Bar *bar, BarArg *a)
 {
-	return statustextlength(stext) + lrpad;
+	return statustextlength(rawstatustext[a->value]);
 }
 
 int
-draw_status(Bar *bar, BarDrawArg *a)
+draw_status(Bar *bar, BarArg *a)
 {
-	return drawstatusbar(a->x, stext);
+	return drawstatusbar(a->x, rawstatustext[a->value]);
 }
 
 int
@@ -121,6 +121,35 @@ drawstatusbar(int x, char* stext)
 	drw_setscheme(drw, scheme[SchemeNorm]);
 
 	return x;
+}
+
+void
+setstatus(const Arg args[], int num_args)
+{
+	Monitor *m;
+	const BarRule *br;
+	Bar *bar;
+
+	int sid = args[0].i;
+	if (sid < 0 || sid > NUM_STATUSES)
+		return;
+
+	strcpy(rawstatustext[sid], args[1].v);
+
+	for (int r = 0; r < LENGTH(barrules); r++) {
+		br = &barrules[r];
+		if (br->value == sid && br->drawfunc == draw_status) {
+			for (m = mons; m; m = m->next) {
+				if (br->monitor > -1 && br->monitor != m->num)
+					continue;
+				for (bar = m->bar; bar; bar = bar->next) {
+					if (br->bar > -1 && br->bar != bar->idx)
+						continue;
+					drawbarwin(bar);
+				}
+			}
+		}
+	}
 }
 
 int

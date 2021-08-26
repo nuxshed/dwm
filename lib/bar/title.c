@@ -1,11 +1,11 @@
 int
-width_wintitle(Bar *bar, BarWidthArg *a)
+width_wintitle(Bar *bar, BarArg *a)
 {
 	return a->max_width;
 }
 
 int
-draw_wintitle(Bar *bar, BarDrawArg *a)
+draw_wintitle(Bar *bar, BarArg *a)
 {
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;

@@ -1,5 +1,5 @@
 int
-width_tags(Bar *bar, BarWidthArg *a)
+width_tags(Bar *bar, BarArg *a)
 {
 	int w, i;
 
@@ -10,7 +10,7 @@ width_tags(Bar *bar, BarWidthArg *a)
 }
 
 int
-draw_tags(Bar *bar, BarDrawArg *a)
+draw_tags(Bar *bar, BarArg *a)
 {
 	int invert;
 	int w, x = a->x;

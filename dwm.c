@@ -129,14 +129,23 @@ struct Bar {
 	int x[BARRULES]; // module position
 };
 
-typedef struct {
-	int max_width;
-} BarWidthArg;
+// typedef struct {
+// 	int max_width;
+// } BarArg;
+
+// typedef struct {
+// 	int x;
+// 	int w;
+// } BarArg;
 
 typedef struct {
 	int x;
+	int y;
+	int h;
 	int w;
-} BarDrawArg;
+        int max_width;
+	int value;
+} BarArg;
 
 typedef struct {
 	int rel_x;
@@ -150,8 +159,8 @@ typedef struct {
 	int bar;
         int value;
 	int alignment; // see bar alignment enum
-	int (*widthfunc)(Bar *bar, BarWidthArg *a);
-	int (*drawfunc)(Bar *bar, BarDrawArg *a);
+	int (*widthfunc)(Bar *bar, BarArg *a);
+	int (*drawfunc)(Bar *bar, BarArg *a);
 	int (*clickfunc)(Bar *bar, Arg *arg, BarClickArg *a);
 	char *name; // for debugging
 	int x, w; // position, width for internal use
@@ -361,6 +370,7 @@ static pid_t winpid(Window w);
 
 /* variables */
 static const char broken[] = "broken";
+static char rawstatustext[NUM_STATUSES][512];
 static char stext[1024];
 static int screen;
 static int sw, sh;           /* X display screen geometry width, height */
