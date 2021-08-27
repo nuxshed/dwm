@@ -38,6 +38,7 @@ drawbarwin(Bar *bar)
 			continue;
 		drw_setscheme(drw, scheme[SchemeNorm]);
 		warg.max_width = (br->alignment < BAR_ALIGN_RIGHT_LEFT ? lw : rw);
+		warg.value = br->value;
 		w = br->widthfunc(bar, &warg);
 		w = MIN(warg.max_width, w);
 
@@ -105,6 +106,7 @@ drawbarwin(Bar *bar)
 		bar->w[r] = w;
 		darg.x = bar->x[r];
 		darg.w = bar->w[r];
+		darg.value = br->value;
 		br->drawfunc(bar, &darg);
 	}
 	drw_map(drw, bar->win, 0, 0, bar->bw, bar->bh);

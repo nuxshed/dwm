@@ -48,12 +48,18 @@ wlan() {
 }
 
 clock() {
-  printf "^c#d8a657^  $(date '+%H:%M') "
+  printf "^c#d8a657^ $(date '+%H:%M') "
 }
 
 # no delay at startup
-xsetroot -name "$(bat)%   $(vol)%   $(wlan)  $(clock)"
+dwmc run_command setstatus 0 "  $(clock)  "
+dwmc run_command setstatus 1 "  $(wlan)  "
+dwmc run_command setstatus 2 "  $(bat)%  "
+dwmc run_command setstatus 3 "  $(vol)%  "
 
 while true; do
-  sleep 5 && dwmc run_command setstatus 0 "$(bat)%   $(vol)%   $(wlan)  $(clock)"
+  sleep 5
+  dwmc run_command setstatus 0 "  $(clock)  "
+  dwmc run_command setstatus 1 "  $(wlan)  "
+  dwmc run_command setstatus 2 "  $(bat)%  "
 done
