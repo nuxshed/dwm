@@ -40,17 +40,6 @@ vol() {
   printf "^c#7daea3^ 墳 $vol"
 }
 
-bri() {
-# get brightness
-MAX_BRI=$(cat /sys/class/backlight/intel_backlight/max_brightness)
-CUR_BRI=$(cat /sys/class/backlight/intel_backlight/brightness)
-
-# calculating current percentage
-CUR_PER=$((CUR_BRI * 100 / MAX_BRI))
-
-printf "^c#d8a657^   $CUR_PER%"
-}
-
 wlan() {
   case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
   up) printf "^c#d3869b^直  Connected" ;;
@@ -67,8 +56,6 @@ dwmc run_command setstatus 0 "  $(clock)  "
 dwmc run_command setstatus 1 "  $(wlan)  "
 dwmc run_command setstatus 2 "  $(bat)% "
 dwmc run_command setstatus 3 "  $(vol)% "
-dwmc run_command setstatus 4 "  $(bri)  "
-
 while true; do
   sleep 5
   dwmc run_command setstatus 0 "  $(clock)  "
