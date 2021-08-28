@@ -11,7 +11,7 @@ draw_ltsymbol(Bar *bar, BarArg *a)
 }
 
 int
-click_ltsymbol(Bar *bar, Arg *arg, BarClickArg *a)
+click_ltsymbol(Bar *bar, Arg *arg, BarArg *a)
 {
 	return ClkLtSymbol;
 }

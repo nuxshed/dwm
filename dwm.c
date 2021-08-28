@@ -562,6 +562,7 @@ unswallow(Client *c)
 }
 
 
+
 void
 buttonpress(XEvent *e)
 {
@@ -572,7 +573,7 @@ buttonpress(XEvent *e)
 	Bar *bar;
 	XButtonPressedEvent *ev = &e->xbutton;
 	const BarRule *br;
-	BarClickArg carg = { 0, 0, 0, 0 };
+	BarArg barg = { 0, 0, 0, 0 };
 
 	click = ClkRootWin;
 	/* focus monitor if necessary */
@@ -591,11 +592,11 @@ buttonpress(XEvent *e)
 				if (br->monitor != 'A' && br->monitor != -1 && br->monitor != mi)
 					continue;
 				if (bar->x[r] <= ev->x && ev->x <= bar->x[r] + bar->w[r]) {
-					carg.rel_x = ev->x - bar->x[r];
-					carg.rel_y = ev->y;
-					carg.rel_w = bar->w[r];
-					carg.rel_h = bar->bh;
-					click = br->clickfunc(bar, &arg, &carg);
+					barg.x = ev->x - bar->x[r];
+					barg.y = ev->y;
+					barg.w = bar->w[r];
+					barg.h = bar->bh;
+					click = br->clickfunc(bar, &arg, &barg);
 					if (click < 0)
 						return;
 					break;

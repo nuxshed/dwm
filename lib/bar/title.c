@@ -29,7 +29,7 @@ draw_wintitle(Bar *bar, BarArg *a)
 }
 
 int
-click_wintitle(Bar *bar, Arg *arg, BarClickArg *a)
+click_wintitle(Bar *bar, Arg *arg, BarArg *a)
 {
 	return ClkWinTitle;
 }

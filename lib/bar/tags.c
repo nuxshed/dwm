@@ -41,13 +41,13 @@ draw_tags(Bar *bar, BarArg *a)
 }
 
 int
-click_tags(Bar *bar, Arg *arg, BarClickArg *a)
+click_tags(Bar *bar, Arg *arg, BarArg *a)
 {
 	int i = 0, x = lrpad / 2;
 
 	do {
 		x += TEXTW(tags[i]);
-	} while (a->rel_x >= x && ++i < LENGTH(tags));
+	} while (a->x >= x && ++i < LENGTH(tags));
 	if (i < LENGTH(tags)) {
 		arg->ui = 1 << i;
 	}

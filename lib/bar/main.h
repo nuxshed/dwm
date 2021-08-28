@@ -20,20 +20,13 @@ typedef struct {
 } BarArg;
 
 typedef struct {
-	int rel_x;
-	int rel_y;
-	int rel_w;
-	int rel_h;
-} BarClickArg;
-
-typedef struct {
 	int monitor;
 	int bar;
         int value;
 	int alignment; // see bar alignment enum
 	int (*widthfunc)(Bar *bar, BarArg *a);
 	int (*drawfunc)(Bar *bar, BarArg *a);
-	int (*clickfunc)(Bar *bar, Arg *arg, BarClickArg *a);
+	int (*clickfunc)(Bar *bar, Arg *arg, BarArg *a);
 	char *name; // for debugging
 	int x, w; // position, width for internal use
 } BarRule;
