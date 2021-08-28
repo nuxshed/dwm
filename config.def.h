@@ -102,6 +102,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #include "lib/layouts.c"
 #include "lib/rio.c"
 #include "lib/scratchpads.c"
+#include "lib/shift.c"
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -310,6 +311,8 @@ static Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
+	{ ClkTagBar,            0,              Button4,        shiftview,      {.i = -1} },
+	{ ClkTagBar,            0,              Button5,        shiftview,      {.i = +1} },
 };
 
 static const char *ipcsockpath = "/tmp/dwm.sock";
