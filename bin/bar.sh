@@ -10,7 +10,7 @@ bat() {
     printf "^c#a9b665^  $CHARGE"
   elif [ "$STATUS" = "Discharging" ]; then
     if [ "$CHARGE" -lt 10 ]; then
-      printf "^c#ea6962^ only  $CHARGE left, charge the damn laptop"
+      printf "^c#ea6962^  $CHARGE"
     elif [ "$CHARGE" -lt 20 ]; then
       printf "^c#ea6962^  $CHARGE"
     elif [ "$CHARGE" -lt 30 ]; then
