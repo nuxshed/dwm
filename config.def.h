@@ -1,22 +1,25 @@
-/* See LICENSE file for copyright and license details. */
+/* config.def.h */
 
 /* appearance */
 static const unsigned int borderpx  = 2;        // border pixel of windows
 static const unsigned int snap      = 10;       // snap pixel
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
+static const int showbar            = 1;        // 0 means no bar
+static const int topbar             = 1;        // 0 means bottom bar
+
 static const unsigned int gappih    = 10;       // horiz inner gap between windows
 static const unsigned int gappiv    = 10;       // vert inner gap between windows
 static const unsigned int gappoh    = 20;       // horiz outer gap between windows and screen edge
 static const unsigned int gappov    = 20;       // vert outer gap between windows and screen edge
 static       int smartgaps          = 0;        // 1 means no outer gap when there is only one window
-static const int showbar            = 1;        // 0 means no bar
-static const int topbar             = 1;        // 0 means bottom bar
+
 static const char slopspawnstyle[]  = "-t 0 -c 0.92,0.85,0.69,0.3 -o"; /* do NOT define -f (format) here */
 static const char slopresizestyle[] = "-t 0 -c 0.92,0.85,0.69,0.3"; /* do NOT define -f (format) here */
 static const int riodraw_borders    = 0;        /* 0 or 1, indicates whether the area drawn using slop includes the window borders */
 static const int riodraw_matchpid   = 1;        /* 0 or 1, indicates whether to match the PID of the client that was spawned with riospawn */
 static const int riodraw_spawnasync = 0;        /* 0 means that the application is only spawned after a successful selection while
-						* 1 means that the application is being initialised in the background while the selection is made */
+                                                 * 1 means that the application is being initialised in the background while the selection is made */
+
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
 static unsigned int attachmode      = 3;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
@@ -43,7 +46,7 @@ static const char *colors[][3]      = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
-// TODO: actually use this
+/* client rules */
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -66,6 +69,7 @@ static const Rule rules[] = {
  *       0  show on monitor 0
  *      'A' show on active monitor (i.e. focused / selected) (or just -1 for active?)
  *    bar - bar index, 0 is default, 1 is extrabar
+ *    value - arbitrary value where the interpretation is module specific
  *    alignment - how the module is aligned compared to other modules
  *    widthfunc, drawfunc, clickfunc - providing bar module width, draw and click functions
  *    name - does nothing, intended for visual clue and for logging / debugging
