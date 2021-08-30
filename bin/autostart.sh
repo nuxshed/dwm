@@ -1,4 +1,4 @@
 #!/bin/sh
 
-picom --experimental-backends --no-fading-openclose& # start the compositor
+picom --experimental-backends # start the compositor
 ~/.dwm/bar.sh
