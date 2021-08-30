@@ -243,7 +243,6 @@ static int handlexevent(struct epoll_event *ev);
 static void incnmaster(const Arg *arg);
 static void keypress(XEvent *e);
 static void killclient(const Arg *arg);
-static void losefullscreen(Client *next);
 static void manage(Window w, XWindowAttributes *wa);
 static void mappingnotify(XEvent *e);
 static void maprequest(XEvent *e);
@@ -286,9 +285,7 @@ static void spawn(const Arg *arg);
 static pid_t spawncmd(const Arg *arg);
 static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
-static void togglefakefullscreen(const Arg *arg);
 static void togglefloating(const Arg *arg);
-static void togglefullscreen(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void unfocus(Client *c, int setfocus);
@@ -1662,16 +1659,6 @@ killclient(const Arg *arg)
 }
 
 void
-losefullscreen(Client *next)
-{
-	Client *sel = selmon->sel;
-	if (!sel || !next)
-		return;
-	if (sel->isfullscreen && sel->fakefullscreen != 1 && ISVISIBLE(sel) && sel->mon == next->mon && !next->isfloating)
-		setfullscreen(sel, 0);
-}
-
-void
 manage(Window w, XWindowAttributes *wa)
 {
 	Client *c, *t = NULL, *term = NULL;
@@ -2846,25 +2833,6 @@ tagmon(const Arg *arg)
 }
 
 void
-togglefakefullscreen(const Arg *arg)
-{
-	Client *c = selmon->sel;
-	if (!c)
-		return;
-
-	if (c->fakefullscreen != 1 && c->isfullscreen) { // exit fullscreen --> fake fullscreen
-		c->fakefullscreen = 2;
-		setfullscreen(c, 0);
-	} else if (c->fakefullscreen == 1) {
-		setfullscreen(c, 0);
-		c->fakefullscreen = 0;
-	} else {
-		c->fakefullscreen = 1;
-		setfullscreen(c, 1);
-	}
-}
-
-void
 togglefloating(const Arg *arg)
 {
 	Client *c = selmon->sel;
@@ -2876,20 +2844,6 @@ togglefloating(const Arg *arg)
 	if (selmon->sel->isfloating)
 		resize(c, c->x, c->y, c->w, c->h, 0);
 	arrange(c->mon);
-}
-
-void
-togglefullscreen(const Arg *arg)
-{
-	Client *c = selmon->sel;
-	if (!c)
-		return;
-
-	if (c->fakefullscreen == 1) { // fake fullscreen --> fullscreen
-		c->fakefullscreen = 2;
-		setfullscreen(c, 1);
-	} else
-		setfullscreen(c, !c->isfullscreen);
 }
 
 void
