@@ -22,9 +22,12 @@ static const int riodraw_spawnasync = 0;        /* 0 means that the application 
 
 static int floatposgrid_x           = 5;        /* float grid columns */
 static int floatposgrid_y           = 5;        /* float grid rows */
+
 static unsigned int attachmode      = 3;        /* 0 master (default), 1 = above, 2 = aside, 3 = below, 4 = bottom */
+
 static const char *fonts[]          = { "Fira Code Nerd Font:size=8" };
 static const char dmenufont[]       = "Fira Code Nerd Font:size=8";
+
 static const char col_gray1[]       = "#1d2021";
 static const char col_gray2[]       = "#282828";
 static const char col_gray3[]       = "#3f3f3f";
@@ -38,8 +41,8 @@ static const char col_aqua[]        = "#89b482";
 static const char *colors[][3]      = {
 	//                      fg            bg              border
 	[SchemeNorm] =        { col_fg,       col_gray1,   col_gray3 },
-	[SchemeSel]  =        { col_gray2,    col_aqua,    col_aqua},
-	[SchemeScratchSel]  = { col_gray2,    col_aqua,    col_red },
+	[SchemeSel]  =        { col_gray2,    col_aqua,    col_aqua },
+	[SchemeScratchSel]  = { col_gray2,    col_aqua,    col_magenta },
 	[SchemeScratchNorm] = { col_gray2,    col_aqua,    col_gray2 },
 };
 
@@ -52,13 +55,14 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance         title       tags mask     isfloating   isterminal   noswallow   floatpos  monitor    scratch key */
-	{ "Gimp",     NULL,            NULL,       0,            1,           0,           0,           NULL,     -1,         0  },
-	{ "firefox",  NULL,            NULL,       0,            0,           0,          -1,           NULL,     -1,         0  },
-	{ "kitty",    NULL,            NULL,       0,            0,           1,           0,           NULL,     -1,         0  },
-	{ "Xephyr",   NULL,            NULL,       0,            0,           0,           1,           NULL,     -1,         0, },
-	{ NULL,       NULL,       "scratchpad",    0,            1,           0,           0,           NULL,     -1,        's' },
-	{ NULL,       NULL,       "Event Tester",  0,            0,           0,           1,           NULL,     -1,         0  }, /* xev */
+
+	{.class = "kitty", .isterminal = 1},
+	{.class = "Xephyr", .noswallow = 1},
+
+        // Scratchpads
+	{.title = "Scratchpad [a]", .isterminal = 1, .isfloating = 1, .floatpos = "50% 50% 50% 65%", .scratchkey = 'a'},
+	{.title = "Scratchpad [s]", .isterminal = 1, .isfloating = 1, .floatpos = "22% 77% 40% 40%", .scratchkey = 's'},
+	{.title = "Scratchpad [d]", .isterminal = 1, .isfloating = 1, .floatpos = "50% 50% 75% 85%", .scratchkey = 'd'},
 };
 
 /* Bar rules allow you to configure what is shown where on the bar, as well as
@@ -153,9 +157,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "kitty", NULL };
 
 /*First arg only serves to match against key in rules*/
-static const char *scratchcmd1[] = {"a", "kitty", NULL};
-static const char *scratchcmd2[] = {"s", "kitty", NULL};
-static const char *scratchcmd3[] = {"d", "kitty", NULL};
+static const char *scratchcmd1[] = {"a", "kitty", "--title", "Scratchpad [a]", NULL};
+static const char *scratchcmd2[] = {"s", "kitty", "--title", "Scratchpad [s]", NULL};
+static const char *scratchcmd3[] = {"d", "kitty", "--title", "Scratchpad [d]", NULL};
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
