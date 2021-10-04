@@ -1,4 +1,5 @@
 #!/bin/sh
 
-picom --experimental-backends # start the compositor
-~/.dwm/bar.sh
+~/.dwm/bar.sh &
+picom --experimental-backends & # start the compositor
+
